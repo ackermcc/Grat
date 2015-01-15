@@ -24,19 +24,38 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
-    self.navigationItem.title = [NSString stringWithFormat:@"Tip: %@", self.selectedTipAmount];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.proximityKitManager startRangingIBeacons];
     
     self.SPs = [[NSMutableArray alloc] init];
-    [self findNearbySP];
+    
+    [center addObserverForName:@"FoundBeacon"
+                        object:nil
+                         queue:nil
+                    usingBlock:^(NSNotification *notification)
+     {
+         //         NSLog(@"Beacon Notificaton: %@",notification.userInfo);
+         
+//         [self.tempSPs addObject:notification.userInfo];
+         [self newSP:notification.userInfo];
+         //         NSLog(@"Notifications Count: %lu",(unsigned long)self.SPs.count);
+     }];
+
+    self.navigationItem.title = [NSString stringWithFormat:@"Tip: %@", self.selectedTipAmount];
     
     // Initialize the refresh control.
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor darkGrayColor];
     self.refreshControl.tintColor = [UIColor whiteColor];
     [self.refreshControl addTarget:self
-                            action:@selector(findNearbySP)
+                            action:@selector(refresh)
                   forControlEvents:UIControlEventValueChanged];
+    
+//    [self findNearbySP];
+    [self.SPs addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"John",@"firstName",@"Doe",@"lastName",@"Junior Valet",@"position",@"Best Valet, Llc",@"company",@" ",@"hard", nil]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,37 +63,28 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)findNearbySP {
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+- (void)newSP: (NSDictionary *)sp {
+    [self.SPs addObject:sp];
+    [self reloadData];
+}
+
+-(void)refresh {
     if ([self.refreshControl isRefreshing]) {
         NSLog(@"Refreshing");
         [self.SPs removeAllObjects];
+        
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate.proximityKitManager startRangingIBeacons];
+        
     }
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.proximityKitManager startRangingIBeacons];
-    
-    [center addObserverForName:@"FoundBeacon"
-                        object:nil
-                         queue:nil
-                    usingBlock:^(NSNotification *notification)
-     {
-//         NSLog(@"Beacon Notificaton: %@",notification.userInfo);
-         
-         [self reloadData:notification];
-         NSLog(@"Notifications Count: %lu",(unsigned long)self.SPs.count);
-     }];
-    [self reloadData:nil];
+    [self reloadData];
 }
 
-- (void)reloadData: (NSNotification *)notification
+- (void)reloadData
 {
     NSLog(@"Reload");
-    if (notification) {
-        [self.SPs addObject:notification.userInfo];
-    } else {
-        [self.SPs addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"John",@"firstName",@"Doe",@"lastName",@"Junior Valet",@"position",@"Best Valet, Llc",@"company", nil]];
-    }
+    
     // Reload table data
     [self.tableView reloadData];
     
