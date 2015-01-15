@@ -47,7 +47,7 @@
 -(void)findNearbySP {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     if ([self.refreshControl isRefreshing]) {
-        NSLog(@"refreshing");
+        NSLog(@"Refreshing");
         [self.SPs removeAllObjects];
     }
     
@@ -64,12 +64,16 @@
          [self reloadData:notification];
          NSLog(@"Notifications Count: %lu",(unsigned long)self.SPs.count);
      }];
+    [self reloadData:nil];
 }
 
 - (void)reloadData: (NSNotification *)notification
 {
+    NSLog(@"Reload");
     if (notification) {
         [self.SPs addObject:notification.userInfo];
+    } else {
+        [self.SPs addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"John",@"firstName",@"Doe",@"lastName",@"Junior Valet",@"position",@"Best Valet, Llc",@"company", nil]];
     }
     // Reload table data
     [self.tableView reloadData];
@@ -86,7 +90,6 @@
         self.refreshControl.attributedTitle = attributedTitle;
         
         [self.refreshControl endRefreshing];
-        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     }
 }
 
