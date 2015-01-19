@@ -24,7 +24,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSArray *suggestions = @[@"5.00",@"3.00",@"2.00"];
+    NSArray *suggestions = @[@"$5.00",@"$3.00",@"$2.00",@"Other"];
     
     self.tipSuggestions = [[NSMutableArray alloc] initWithArray:suggestions];
 }
@@ -62,9 +62,18 @@
     
     NSString *amount = [self.tipSuggestions objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"$%@", amount];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", amount];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.textLabel.text  isEqual: @"Other"]) {
+        [self performSegueWithIdentifier:@"Create Tip" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"Tip" sender:self];
+    }
 }
 
 
@@ -112,8 +121,13 @@
     NSIndexPath *path = [self.tableView indexPathForSelectedRow];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
     
-    SPTableViewController *destination = [segue destinationViewController];
-    destination.selectedTipAmount = cell.textLabel.text;
+    if ([segue.identifier isEqual:@"Tip"]) {
+        SPTableViewController *destination = [segue destinationViewController];
+        destination.selectedTipAmount = cell.textLabel.text;
+        destination.cameFromCreateTip = NO;
+    } else if ([segue.identifier isEqual:@"Create Tip"]) {
+        
+    }
 }
 
 

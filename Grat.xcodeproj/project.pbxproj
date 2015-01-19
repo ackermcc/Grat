@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		274515B444E2A809E09DE3EB /* libPods-Grat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4212D9E3B79487FC12A4B660 /* libPods-Grat.a */; };
+		F3CC35AE1A6D7F08004FC99C /* CustomTipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CC35AD1A6D7F08004FC99C /* CustomTipViewController.m */; };
 		F3D08CE31A634A6C00ED9EAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D08CE21A634A6C00ED9EAA /* Main.storyboard */; };
 		F3D08CE61A634E7600ED9EAA /* ConfirmTipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D08CE51A634E7600ED9EAA /* ConfirmTipViewController.m */; };
 		F3D0D4CC1A62EB4B00949143 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D4CB1A62EB4B00949143 /* main.m */; };
@@ -34,6 +35,8 @@
 		4212D9E3B79487FC12A4B660 /* libPods-Grat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Grat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		516FBDB62F0E616291869B25 /* Pods-Grat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Grat/Pods-Grat.release.xcconfig"; sourceTree = "<group>"; };
 		BDB5721519A3769C02168AE0 /* Pods-Grat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Grat/Pods-Grat.debug.xcconfig"; sourceTree = "<group>"; };
+		F3CC35AC1A6D7F08004FC99C /* CustomTipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTipViewController.h; sourceTree = "<group>"; };
+		F3CC35AD1A6D7F08004FC99C /* CustomTipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTipViewController.m; sourceTree = "<group>"; };
 		F3D08CE21A634A6C00ED9EAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F3D08CE41A634E7600ED9EAA /* ConfirmTipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmTipViewController.h; sourceTree = "<group>"; };
 		F3D08CE51A634E7600ED9EAA /* ConfirmTipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmTipViewController.m; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 				F3D0D4F71A62F3E200949143 /* ProximityKit.plist */,
 				F3D0D4F31A62EC2800949143 /* TipSelectionTableViewController.h */,
 				F3D0D4F41A62EC2800949143 /* TipSelectionTableViewController.m */,
+				F3CC35AC1A6D7F08004FC99C /* CustomTipViewController.h */,
+				F3CC35AD1A6D7F08004FC99C /* CustomTipViewController.m */,
 				F3D0D4F11A62EC2800949143 /* SPTableViewController.h */,
 				F3D0D4F21A62EC2800949143 /* SPTableViewController.m */,
 				F3D08CE41A634E7600ED9EAA /* ConfirmTipViewController.h */,
@@ -296,6 +301,7 @@
 				F3D0D4F51A62EC2800949143 /* SPTableViewController.m in Sources */,
 				F3D0D4F61A62EC2800949143 /* TipSelectionTableViewController.m in Sources */,
 				F3D0D4CF1A62EB4B00949143 /* AppDelegate.m in Sources */,
+				F3CC35AE1A6D7F08004FC99C /* CustomTipViewController.m in Sources */,
 				F3D08CE61A634E7600ED9EAA /* ConfirmTipViewController.m in Sources */,
 				F3D0D4CC1A62EB4B00949143 /* main.m in Sources */,
 			);

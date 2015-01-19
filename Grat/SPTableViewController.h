@@ -15,4 +15,6 @@
 @property (nonatomic) NSDictionary *SP;
 @property (nonatomic) NSMutableArray *SPs;
 
+@property (nonatomic) BOOL cameFromCreateTip;
+
 @end

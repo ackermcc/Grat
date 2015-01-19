@@ -16,6 +16,19 @@
 
 @implementation SPTableViewController
 
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        NSLog(@"I backed out");
+        if(self.cameFromCreateTip == YES){
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        }
+    }
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -24,6 +37,14 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    //Back Button
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle: @"Back"
+                                   style: UIBarButtonItemStylePlain
+                                   target: nil action: nil];
+    
+    [self.navigationItem setBackBarButtonItem: backButton];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     

@@ -5,6 +5,68 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="GZO-JD-IpD">
+            <objects>
+                <navigationController id="TOc-Zr-vS3" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OFD-nq-f5t">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qe4-Fq-KJK" kind="relationship" relationship="rootViewController" id="WkX-jU-60M"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fRN-kV-INg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1184" y="-1272"/>
+        </scene>
+        <!--Create Tip-->
+        <scene sceneID="vCy-P9-jW3">
+            <objects>
+                <viewController id="qe4-Fq-KJK" customClass="CustomTipViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tQa-xt-51G"/>
+                        <viewControllerLayoutGuide type="bottom" id="PYr-DV-T2J"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tro-f7-DgJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8KI-ao-cpn">
+                                <rect key="frame" x="16" y="120" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8KI-ao-cpn" firstAttribute="top" secondItem="tQa-xt-51G" secondAttribute="bottom" constant="100" id="0ni-8I-ngC"/>
+                            <constraint firstItem="8KI-ao-cpn" firstAttribute="leading" secondItem="tro-f7-DgJ" secondAttribute="leadingMargin" id="Q9q-cf-wTB"/>
+                            <constraint firstItem="8KI-ao-cpn" firstAttribute="trailing" secondItem="tro-f7-DgJ" secondAttribute="trailingMargin" id="pRC-vN-I53"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create Tip" id="Ro7-fH-efl">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="8BU-Dy-OTl">
+                            <connections>
+                                <action selector="btnDismissTipView:" destination="qe4-Fq-KJK" id="7wS-WJ-kQm"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="FND-jA-BXZ">
+                            <connections>
+                                <action selector="btnTipSelected:" destination="qe4-Fq-KJK" id="ctb-xA-Sd3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="inptTipAmount" destination="8KI-ao-cpn" id="lPi-0q-0VM"/>
+                        <segue destination="gQs-2Y-H3F" kind="show" identifier="Custom Tip" id="zmb-lM-HgG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z1S-zy-X6g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-372" y="-1272"/>
+        </scene>
         <!--Tip Selection Table View Controller-->
         <scene sceneID="1jx-dc-mmo">
             <objects>
@@ -19,9 +81,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P4V-EY-e1M" id="qzM-Ki-LZx">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="gQs-2Y-H3F" kind="show" id="kCh-QS-czC"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -30,6 +89,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" prompt="Select Tip Amount" id="X18-Rg-tU5"/>
+                    <connections>
+                        <segue destination="gQs-2Y-H3F" kind="show" identifier="Tip" id="rNs-NB-59I"/>
+                        <segue destination="TOc-Zr-vS3" kind="presentation" identifier="Create Tip" id="FGl-Zl-cKy"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rna-Jn-wmj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -122,4 +185,7 @@
             <point key="canvasLocation" x="-1192" y="-572"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="zmb-lM-HgG"/>
+    </inferredMetricsTieBreakers>
 </document>

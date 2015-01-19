@@ -19,6 +19,14 @@
     // Do any additional setup after loading the view.
     
     self.lblConfirm.text = self.confirmStatement;
+    
+    //Back Button
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle: @"Back"
+                                   style: UIBarButtonItemStylePlain
+                                   target: nil action: nil];
+    
+    [self.navigationItem setBackBarButtonItem: backButton];
 }
 
 - (void)didReceiveMemoryWarning {
