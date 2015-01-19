@@ -210,6 +210,8 @@
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
         
         ConfirmTipViewController *dest = [segue destinationViewController];
+        dest.SP = cell.textLabel.text;
+        dest.tipAmount = self.selectedTipAmount;
         dest.confirmStatement = [NSString stringWithFormat:@"Do you want to tip %@, to %@?", self.selectedTipAmount,cell.textLabel.text];
     }
 }

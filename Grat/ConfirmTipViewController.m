@@ -44,4 +44,33 @@
 }
 */
 
+- (IBAction)btnSubmitTip:(id)sender {
+    
+    UIAlertView *confirmSubmit = [[UIAlertView alloc] initWithTitle:@"Confirm Tip" message:[NSString stringWithFormat:@"Tip %@ to %@?", self.tipAmount, self.SP] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Submit", nil];
+    
+    [confirmSubmit setTag:0];
+    [confirmSubmit show];
+}
+
+- (IBAction)btnCancelTip:(id)sender {
+    UIAlertView *confirmCancel = [[UIAlertView alloc] initWithTitle:@"Cancel Tip" message:[NSString stringWithFormat:@"Cancel tip %@ to %@?", self.tipAmount, self.SP] delegate:self cancelButtonTitle:@"Back" otherButtonTitles:@"Cancel Tip", nil];
+    
+    [confirmCancel setTag:1];
+    [confirmCancel show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 0) {
+        if (buttonIndex == 1) {
+            NSLog(@"Submit Tip");
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    } else if (alertView.tag == 1) {
+        if (buttonIndex == 1) {
+            NSLog(@"Cancel Tip");
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
+}
+
 @end

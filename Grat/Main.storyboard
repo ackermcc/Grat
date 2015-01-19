@@ -149,11 +149,30 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdt-1W-VJd">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Cancel" id="0Ts-s6-dH7">
+                                        <connections>
+                                            <action selector="btnCancelTip:" destination="GNT-0V-hy6" id="OUR-Nf-eNx"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Vy4-Kx-raj"/>
+                                    <barButtonItem title="Submit" id="dGH-iP-me2">
+                                        <connections>
+                                            <action selector="btnSubmitTip:" destination="GNT-0V-hy6" id="g9R-2B-2EO"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="buU-ez-2sE" firstAttribute="top" secondItem="Tpp-Da-Gju" secondAttribute="bottom" constant="92" id="9iK-z5-n4O"/>
+                            <constraint firstItem="fdt-1W-VJd" firstAttribute="leading" secondItem="AJG-K8-yoe" secondAttribute="leading" id="JP6-xd-bUd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="buU-ez-2sE" secondAttribute="trailing" constant="18" id="cmq-tA-lKA"/>
+                            <constraint firstItem="fdt-1W-VJd" firstAttribute="bottom" secondItem="MjQ-iF-ivl" secondAttribute="top" id="ifp-Tc-08s"/>
+                            <constraint firstAttribute="trailing" secondItem="fdt-1W-VJd" secondAttribute="trailing" id="po8-Zo-eAb"/>
                             <constraint firstItem="buU-ez-2sE" firstAttribute="leading" secondItem="AJG-K8-yoe" secondAttribute="leadingMargin" constant="25" id="uW3-hU-Bgi"/>
                         </constraints>
                     </view>
