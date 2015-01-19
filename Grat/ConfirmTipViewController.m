@@ -7,6 +7,7 @@
 //
 
 #import "ConfirmTipViewController.h"
+#import "TipSelectionTableViewController.h"
 
 @interface ConfirmTipViewController ()
 
@@ -63,12 +64,20 @@
     if (alertView.tag == 0) {
         if (buttonIndex == 1) {
             NSLog(@"Submit Tip");
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            if (self.cameFromCreateTip == YES) {
+                [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
         }
     } else if (alertView.tag == 1) {
         if (buttonIndex == 1) {
             NSLog(@"Cancel Tip");
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            if (self.cameFromCreateTip == YES) {
+                [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
         }
     }
 }

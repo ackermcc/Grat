@@ -16,4 +16,6 @@
 - (IBAction)btnSubmitTip:(id)sender;
 - (IBAction)btnCancelTip:(id)sender;
 
+@property (nonatomic) BOOL cameFromCreateTip;
+
 @end

@@ -33,7 +33,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8KI-ao-cpn">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8KI-ao-cpn">
                                 <rect key="frame" x="16" y="120" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
@@ -41,9 +41,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8KI-ao-cpn" firstAttribute="top" secondItem="tQa-xt-51G" secondAttribute="bottom" constant="100" id="0ni-8I-ngC"/>
-                            <constraint firstItem="8KI-ao-cpn" firstAttribute="leading" secondItem="tro-f7-DgJ" secondAttribute="leadingMargin" id="Q9q-cf-wTB"/>
-                            <constraint firstItem="8KI-ao-cpn" firstAttribute="trailing" secondItem="tro-f7-DgJ" secondAttribute="trailingMargin" id="pRC-vN-I53"/>
+                            <constraint firstItem="8KI-ao-cpn" firstAttribute="leading" secondItem="tro-f7-DgJ" secondAttribute="leadingMargin" id="9LS-gT-TpA"/>
+                            <constraint firstItem="8KI-ao-cpn" firstAttribute="trailing" secondItem="tro-f7-DgJ" secondAttribute="trailingMargin" id="XgA-6F-zma"/>
+                            <constraint firstItem="8KI-ao-cpn" firstAttribute="top" secondItem="tQa-xt-51G" secondAttribute="bottom" constant="56" id="dSM-1C-RVi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create Tip" id="Ro7-fH-efl">

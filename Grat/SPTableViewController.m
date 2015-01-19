@@ -22,7 +22,6 @@
         // in the navigation stack.
         NSLog(@"I backed out");
         if(self.cameFromCreateTip == YES){
-//            [self.navigationController popToRootViewControllerAnimated:YES];
             [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         }
     }
@@ -210,10 +209,14 @@
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
         
         ConfirmTipViewController *dest = [segue destinationViewController];
+        if(self.cameFromCreateTip == YES){
+            dest.cameFromCreateTip = YES;
+        }
         dest.SP = cell.textLabel.text;
         dest.tipAmount = self.selectedTipAmount;
         dest.confirmStatement = [NSString stringWithFormat:@"Do you want to tip %@, to %@?", self.selectedTipAmount,cell.textLabel.text];
     }
+    
 }
 
 
