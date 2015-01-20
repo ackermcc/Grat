@@ -8,6 +8,7 @@
 
 #import "ConfirmTipViewController.h"
 #import "TipSelectionTableViewController.h"
+#import <Firebase/Firebase.h>
 
 @interface ConfirmTipViewController ()
 
@@ -70,6 +71,25 @@
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 self.navigationItem.prompt = @"Select Tip Amount";
             }
+            // Create a reference to a Firebase location
+            Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://grat.firebaseio.com"];
+            // Write data to Firebase
+            Firebase *transactions = [myRootRef childByAppendingPath:@"transactions"];
+            Firebase *postRef = [transactions childByAutoId];
+            
+            NSDate *now = [NSDate date];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
+            NSString *timeStamp = [dateFormatter stringFromDate:now];
+            
+            NSDictionary *transaction = @{
+                                          @"time-stamp": timeStamp,
+                                          @"service-professional": self.SP,
+                                          @"tip-amount": self.tipAmount
+                                          };
+            
+            [postRef setValue:transaction];
+            
         }
     } else if (alertView.tag == 1) {
         if (buttonIndex == 1) {
