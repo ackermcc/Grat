@@ -88,7 +88,13 @@
                             <outlet property="delegate" destination="U34-aA-kfY" id="hem-KA-y13"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" prompt="Select Tip Amount" id="X18-Rg-tU5"/>
+                    <navigationItem key="navigationItem" prompt="Select Tip Amount" id="X18-Rg-tU5">
+                        <barButtonItem key="leftBarButtonItem" title="History" id="d9J-We-OEY">
+                            <connections>
+                                <segue destination="hNY-mZ-S3v" kind="presentation" id="5zZ-yI-gfj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="gQs-2Y-H3F" kind="show" identifier="Tip" id="rNs-NB-59I"/>
                         <segue destination="TOc-Zr-vS3" kind="presentation" identifier="Create Tip" id="FGl-Zl-cKy"/>
@@ -97,6 +103,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rna-Jn-wmj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-372" y="-572"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="bea-Tn-w7F">
+            <objects>
+                <tableViewController id="1B3-jZ-JBI" customClass="TransactionHistoryTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="S1r-O2-bRa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="transaction" textLabel="QmY-hF-R9S" detailTextLabel="HHd-cL-aBQ" style="IBUITableViewCellStyleSubtitle" id="fX2-I8-UFz">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fX2-I8-UFz" id="p8x-0P-2Ae">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QmY-hF-R9S">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HHd-cL-aBQ">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1B3-jZ-JBI" id="H30-Nq-B8S"/>
+                            <outlet property="delegate" destination="1B3-jZ-JBI" id="V8L-TZ-fPF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="History" id="Ib6-Qf-Ted">
+                        <barButtonItem key="leftBarButtonItem" title="Hide" id="Gdo-lC-3KC">
+                            <connections>
+                                <action selector="btnHideHistory:" destination="1B3-jZ-JBI" id="sUB-Qg-ciP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BdV-Bj-uhu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-372" y="135"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hMT-de-cO7">
+            <objects>
+                <navigationController id="hNY-mZ-S3v" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0cc-vW-Ab5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1B3-jZ-JBI" kind="relationship" relationship="rootViewController" id="YhN-rx-jBf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Odv-KU-ZrP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1192" y="135"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="NmX-7j-FXN">
