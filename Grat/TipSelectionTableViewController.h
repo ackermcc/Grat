@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TipSelectionTableViewController : UITableViewController
+@interface TipSelectionTableViewController : UITableViewController 
 
 @property (nonatomic) NSMutableArray *tipSuggestions;
 

@@ -68,6 +68,7 @@
                 [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
             } else {
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                self.navigationItem.prompt = @"Select Tip Amount";
             }
         }
     } else if (alertView.tag == 1) {
@@ -77,6 +78,7 @@
                 [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
             } else {
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                self.navigationItem.prompt = @"Select Tip Amount";
             }
         }
     }
