@@ -9,6 +9,7 @@
 #import "SPTableViewController.h"
 #import "AppDelegate.h"
 #import "ConfirmTipViewController.h"
+#import "SPTableViewCell.h"
 
 @interface SPTableViewController ()
 
@@ -75,7 +76,7 @@
                   forControlEvents:UIControlEventValueChanged];
     
 //    [self findNearbySP];
-    [self.SPs addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"John",@"firstName",@"Doe",@"lastName",@"Junior Valet",@"position",@"Best Valet, Llc",@"company",@" ",@"hard", nil]];
+    [self.SPs addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Daryl",@"firstName",@"Mootoo",@"lastName",@"Junior Valet",@"position",@"Best Valet, Llc",@"company",@" ",@"hard", nil]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -138,19 +139,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"sp";
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    SPTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     if(cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        cell = [[SPTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
     NSString *firstName = [[self.SPs objectAtIndex:indexPath.row] objectForKey:@"firstName"];
     NSString *lastInitial = [[self.SPs objectAtIndex:indexPath.row] objectForKey:@"lastName"];
     NSString *position = [[self.SPs objectAtIndex:indexPath.row] objectForKey:@"position"];
-    NSString *company = [[self.SPs objectAtIndex:indexPath.row] objectForKey:@"company"];
+//    NSString *company = [[self.SPs objectAtIndex:indexPath.row] objectForKey:@"company"];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",firstName, lastInitial];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",position, company];
+    cell.lblSpName.text = [NSString stringWithFormat:@"%@ %@",firstName, lastInitial];
+    cell.lblSpPosition.text = [NSString stringWithFormat:@"%@",position];
     
     // Configure the cell...
     
@@ -203,18 +204,19 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    SPTableViewCell *cell = (SPTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+    NSLog(@"%@", cell.textLabel);
     
     if([segue.identifier isEqualToString:@"name"]) {
-        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
         
         ConfirmTipViewController *dest = [segue destinationViewController];
         if(self.cameFromCreateTip == YES){
             dest.cameFromCreateTip = YES;
         }
-        dest.SP = cell.textLabel.text;
+        dest.SP = cell.lblSpName.text;
         dest.tipAmount = self.selectedTipAmount;
-        dest.confirmStatement = [NSString stringWithFormat:@"Do you want to tip %@, to %@?", self.selectedTipAmount,cell.textLabel.text];
+        dest.confirmStatement = [NSString stringWithFormat:@"Do you want to tip %@, to %@?", self.selectedTipAmount,cell.lblSpName.text];
     }
     
 }

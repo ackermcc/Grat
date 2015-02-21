@@ -8,6 +8,7 @@
 
 #import "TipSelectionTableViewController.h"
 #import "SPTableViewController.h"
+#import "TipTableViewCell.h"
 
 @interface TipSelectionTableViewController ()
 
@@ -24,9 +25,11 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSArray *suggestions = @[@"$5.00",@"$3.00",@"$2.00",@"Other"];
+    NSArray *tip = @[@"$5",@"$3",@"$15",@"$$"];
+    NSArray *suggestionString = @[@"Suggested",@"Tight Budget",@"Big Spender",@"Custom"];
     
-    self.tipSuggestions = [[NSMutableArray alloc] initWithArray:suggestions];
+    self.tipSuggestions = [[NSMutableArray alloc] initWithArray:tip];
+    self.tipString = [[NSMutableArray alloc] initWithArray:suggestionString];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,15 +57,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"tip";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    TipTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     if(cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[TipTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
     NSString *amount = [self.tipSuggestions objectAtIndex:indexPath.row];
+    NSString *suggestion = [self.tipString objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", amount];
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@", amount];
+    cell.lblTipAmount.textColor = [UIColor colorWithRed:27.0/255.0 green:188.0/255.0 blue:155.0/255.0 alpha:1.0];
+    cell.lblTipAmount.text = amount;
+    cell.lblTipSugestionString.text = suggestion;
     
     return cell;
 }
@@ -119,11 +126,11 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+    TipTableViewCell *cell = (TipTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
     
     if ([segue.identifier isEqual:@"Tip"]) {
         SPTableViewController *destination = [segue destinationViewController];
-        destination.selectedTipAmount = cell.textLabel.text;
+        destination.selectedTipAmount = cell.lblTipAmount.text;
         destination.cameFromCreateTip = NO;
     } else if ([segue.identifier isEqual:@"Create Tip"]) {
         

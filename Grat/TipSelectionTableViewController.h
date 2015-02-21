@@ -11,5 +11,6 @@
 @interface TipSelectionTableViewController : UITableViewController 
 
 @property (nonatomic) NSMutableArray *tipSuggestions;
+@property (nonatomic) NSMutableArray *tipString;
 
 @end
