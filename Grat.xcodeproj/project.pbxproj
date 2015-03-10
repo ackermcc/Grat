@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		274515B444E2A809E09DE3EB /* libPods-Grat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4212D9E3B79487FC12A4B660 /* libPods-Grat.a */; };
 		F31C71871A6E21FF00C4F958 /* TransactionHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F31C71861A6E21FF00C4F958 /* TransactionHistoryTableViewController.m */; };
+		F3209E091AAEA391004CAF88 /* GestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3209E081AAEA391004CAF88 /* GestureViewController.m */; };
 		F352E1FA1A98F872001165A4 /* SPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F352E1F91A98F872001165A4 /* SPTableViewCell.m */; };
 		F3CC35AE1A6D7F08004FC99C /* CustomTipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CC35AD1A6D7F08004FC99C /* CustomTipViewController.m */; };
 		F3D08CE31A634A6C00ED9EAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D08CE21A634A6C00ED9EAA /* Main.storyboard */; };
@@ -40,6 +41,8 @@
 		BDB5721519A3769C02168AE0 /* Pods-Grat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Grat/Pods-Grat.debug.xcconfig"; sourceTree = "<group>"; };
 		F31C71851A6E21FF00C4F958 /* TransactionHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionHistoryTableViewController.h; sourceTree = "<group>"; };
 		F31C71861A6E21FF00C4F958 /* TransactionHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionHistoryTableViewController.m; sourceTree = "<group>"; };
+		F3209E071AAEA391004CAF88 /* GestureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureViewController.h; sourceTree = "<group>"; };
+		F3209E081AAEA391004CAF88 /* GestureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureViewController.m; sourceTree = "<group>"; };
 		F352E1F81A98F872001165A4 /* SPTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTableViewCell.h; sourceTree = "<group>"; };
 		F352E1F91A98F872001165A4 /* SPTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTableViewCell.m; sourceTree = "<group>"; };
 		F3CC35AC1A6D7F08004FC99C /* CustomTipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTipViewController.h; sourceTree = "<group>"; };
@@ -144,6 +147,8 @@
 				F3D0D4CE1A62EB4B00949143 /* AppDelegate.m */,
 				F3D0D4D61A62EB4B00949143 /* Images.xcassets */,
 				F3D08CE21A634A6C00ED9EAA /* Main.storyboard */,
+				F3209E071AAEA391004CAF88 /* GestureViewController.h */,
+				F3209E081AAEA391004CAF88 /* GestureViewController.m */,
 				F3D0D4D81A62EB4B00949143 /* LaunchScreen.xib */,
 				F3D0D4C91A62EB4B00949143 /* Supporting Files */,
 			);
@@ -317,6 +322,7 @@
 				F31C71871A6E21FF00C4F958 /* TransactionHistoryTableViewController.m in Sources */,
 				F3D0D4F61A62EC2800949143 /* TipSelectionTableViewController.m in Sources */,
 				F352E1FA1A98F872001165A4 /* SPTableViewCell.m in Sources */,
+				F3209E091AAEA391004CAF88 /* GestureViewController.m in Sources */,
 				F3D0D4CF1A62EB4B00949143 /* AppDelegate.m in Sources */,
 				F3CC35AE1A6D7F08004FC99C /* CustomTipViewController.m in Sources */,
 				F3E4BAF21A98EAF400FB0971 /* TipTableViewCell.m in Sources */,
