@@ -8,7 +8,7 @@
 
 #import "GestureViewController.h"
 
-#define kMinimumPanDistance 10.0f
+#define kMinimumPanDistance 20.0f
 CGPoint lastRecognizedInterval;
 CGPoint previousRecognizedInterval;
 
