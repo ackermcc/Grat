@@ -26,6 +26,14 @@ CGPoint previousRecognizedInterval;
     
     UIPanGestureRecognizer *valuePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveViewWithGestureRecognizer:)];
     [self.view addGestureRecognizer:valuePan];
+    
+    self.lblSPname.text = self.SPname;
+    self.lblSPtitle.text = self.SPtitle;
+    self.SPcontainer.backgroundColor = [UIColor colorWithRed:11.0/255.0 green:211.0/255.0 blue:138.0/255.0 alpha:1.0];
+    
+    self.btnNext.layer.cornerRadius = 5;
+    [self.btnNext setBackgroundColor:[UIColor colorWithRed:50.0/255.0 green:53.0/255.0 blue:66.0/255.0 alpha:1.0]];
+    self.btnNext.tintColor = [UIColor whiteColor];
 }
 
 -(void)moveViewWithGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer {

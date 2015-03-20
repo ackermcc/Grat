@@ -14,7 +14,10 @@
 
 @property (nonatomic) NSDictionary *SP;
 @property (nonatomic) NSMutableArray *SPs;
+@property (weak, nonatomic) IBOutlet UIView *btnFindSP;
 
 @property (nonatomic) BOOL cameFromCreateTip;
+
+@property (nonatomic) UILongPressGestureRecognizer *longPress;
 
 @end

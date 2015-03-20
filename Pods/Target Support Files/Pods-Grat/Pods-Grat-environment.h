@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_Firebase 1
 #define COCOAPODS_VERSION_PATCH_Firebase 2
 
+// FontAwesome
+#define COCOAPODS_POD_AVAILABLE_FontAwesome
+#define COCOAPODS_VERSION_MAJOR_FontAwesome 4
+#define COCOAPODS_VERSION_MINOR_FontAwesome 3
+#define COCOAPODS_VERSION_PATCH_FontAwesome 0
+
 // ProximityKit
 #define COCOAPODS_POD_AVAILABLE_ProximityKit
 #define COCOAPODS_VERSION_MAJOR_ProximityKit 1

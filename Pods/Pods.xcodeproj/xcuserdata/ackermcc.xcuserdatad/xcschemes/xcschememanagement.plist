@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Grat-FontAwesome.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Grat-ProximityKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5919BCBE6DA685C5B36ADC0C</key>
+		<key>73AF0C4B7CA2454D00D9D9EA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BCB18F69D406C5F812CF51F7</key>
+		<key>7FE3DF4C787308ED770384AC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F16181A0B70AA7550598CD50</key>
+		<key>AC3A8E9B98C8FB8B819A5EC9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C70A6FCB33F9F1E630CBF19D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

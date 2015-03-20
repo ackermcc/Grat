@@ -1,44 +1,30 @@
 //
-//  SPTableViewController.m
-//  Grat-Demo
+//  LocateSPViewController.m
+//  Grat
 //
-//  Created by Chad Ackerman on 1/8/15.
-//  Copyright (c) 2015 Grat. All rights reserved.
+//  Created by Chad Ackerman on 3/16/15.
+//  Copyright (c) 2015 Chad Ackerman. All rights reserved.
 //
 
-#import "SPTableViewController.h"
+#import "LocateSPViewController.h"
 #import "AppDelegate.h"
 #import "ConfirmTipViewController.h"
 #import "SPTableViewCell.h"
+#import "GestureViewController.h"
 
 #import <NSString+FontAwesome.h>
 
-@interface SPTableViewController ()
+@interface LocateSPViewController ()
 
 @end
 
-@implementation SPTableViewController
-
--(void) viewWillDisappear:(BOOL)animated {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-        // back button was pressed.  We know this is true because self is no longer
-        // in the navigation stack.
-        NSLog(@"I backed out");
-        if(self.cameFromCreateTip == YES){
-            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        }
-    }
-    [super viewWillDisappear:animated];
-}
+@implementation LocateSPViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // Do any additional setup after loading the view.
+    self.spTableView.dataSource = self;
+    self.spTableView.delegate = self;
     
     //Back Button
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
@@ -48,9 +34,9 @@
     
     //Search
     UIBarButtonItem *search = [[UIBarButtonItem alloc]
-                                   initWithTitle: @"Search"
-                                   style: UIBarButtonItemStylePlain
-                                   target: nil action: nil];
+                               initWithTitle: @"Search"
+                               style: UIBarButtonItemStylePlain
+                               target: nil action: nil];
     
     [search setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                     [UIFont fontWithName:@"FontAwesome" size:20.0], NSFontAttributeName,
@@ -66,9 +52,6 @@
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.proximityKitManager startRangingIBeacons];
-    
     self.SPs = [[NSMutableArray alloc] init];
     
     [center addObserverForName:@"FoundBeacon"
@@ -78,12 +61,12 @@
      {
          //         NSLog(@"Beacon Notificaton: %@",notification.userInfo);
          
-//         [self.tempSPs addObject:notification.userInfo];
+         //         [self.tempSPs addObject:notification.userInfo];
          [self newSP:notification.userInfo];
          //         NSLog(@"Notifications Count: %lu",(unsigned long)self.SPs.count);
      }];
-
-//    self.navigationItem.title = [NSString stringWithFormat:@"Tip: %@", self.selectedTipAmount];
+    
+    //    self.navigationItem.title = [NSString stringWithFormat:@"Tip: %@", self.selectedTipAmount];
     
     // Initialize the refresh control.
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -92,8 +75,9 @@
     [self.refreshControl addTarget:self
                             action:@selector(refresh)
                   forControlEvents:UIControlEventValueChanged];
+    [self.spTableView addSubview:self.refreshControl];
     
-//    [self findNearbySP];
+    //    [self findNearbySP];
     [self.SPs addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Daryl",@"firstName",@"Mootoo",@"lastName",@"Junior Valet",@"position",@"Best Valet, Llc",@"company",@" ",@"hard", nil]];
     
     //Long Press
@@ -102,18 +86,17 @@
     [self.btnFindSP addGestureRecognizer:self.longPress];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)holdAction:(UILongPressGestureRecognizer *)holdRecognizer
 {
     if (holdRecognizer.state == UIGestureRecognizerStateBegan) {
         NSLog(@"Holding Correctly. Release when ready.");
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate.proximityKitManager startRangingIBeacons];
     } else if (holdRecognizer.state == UIGestureRecognizerStateEnded)
     {
         NSLog(@"You let go!");
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate.proximityKitManager stopRangingIBeacons];
     }
 }
 
@@ -140,7 +123,7 @@
     NSLog(@"Reload");
     
     // Reload table data
-    [self.tableView reloadData];
+    [self.spTableView reloadData];
     
     // End the refreshing
     if (self.refreshControl) {
@@ -181,7 +164,7 @@
     NSString *firstName = [[self.SPs objectAtIndex:indexPath.row] objectForKey:@"firstName"];
     NSString *lastInitial = [[self.SPs objectAtIndex:indexPath.row] objectForKey:@"lastName"];
     NSString *position = [[self.SPs objectAtIndex:indexPath.row] objectForKey:@"position"];
-//    NSString *company = [[self.SPs objectAtIndex:indexPath.row] objectForKey:@"company"];
+    //    NSString *company = [[self.SPs objectAtIndex:indexPath.row] objectForKey:@"company"];
     
     cell.lblSpName.text = [NSString stringWithFormat:@"%@ %@",firstName, lastInitial];
     cell.lblSpPosition.text = [NSString stringWithFormat:@"%@",position];
@@ -192,44 +175,18 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"name" sender:self];
+    [self performSegueWithIdentifier:@"chooseTip" sender:self];
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (CGFloat)tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark - Navigation
 
@@ -237,19 +194,18 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-    SPTableViewCell *cell = (SPTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+    NSIndexPath *path = [self.spTableView indexPathForSelectedRow];
+    SPTableViewCell *cell = (SPTableViewCell *)[self.spTableView cellForRowAtIndexPath:path];
     NSLog(@"%@", cell.textLabel);
     
-    if([segue.identifier isEqualToString:@"name"]) {
+    if([segue.identifier isEqualToString:@"chooseTip"]) {
         
-        ConfirmTipViewController *dest = [segue destinationViewController];
-        if(self.cameFromCreateTip == YES){
-            dest.cameFromCreateTip = YES;
-        }
-        dest.SP = cell.lblSpName.text;
-        dest.tipAmount = self.selectedTipAmount;
-        dest.confirmStatement = [NSString stringWithFormat:@"Do you want to tip %@, to %@?", self.selectedTipAmount,cell.lblSpName.text];
+        GestureViewController *dest = [segue destinationViewController];
+//        if(self.cameFromCreateTip == YES){
+//            dest.cameFromCreateTip = YES;
+//        }
+        dest.SPname = cell.lblSpName.text;
+        dest.SPtitle = cell.lblSpPosition.text;
     }
     
 }

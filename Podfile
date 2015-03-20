@@ -4,6 +4,7 @@
 target 'Grat' do
 pod 'ProximityKit', '~> 1.0'
 pod 'Firebase', '~> 2.1'
+pod 'FontAwesome'
 end
 
 target 'GratTests' do

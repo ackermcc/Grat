@@ -1,13 +1,16 @@
 PODS:
   - Firebase (2.1.2)
+  - FontAwesome (4.3.0)
   - ProximityKit (1.0.0)
 
 DEPENDENCIES:
   - Firebase (~> 2.1)
+  - FontAwesome
   - ProximityKit (~> 1.0)
 
 SPEC CHECKSUMS:
   Firebase: 7052c7b7f37d6ba0d3bb1c7c2849864aa5e9d02e
+  FontAwesome: 23a817959aa322364ac04819e420aa15c6a5ea3c
   ProximityKit: 35e517cbf17a0d855c50997a8584b574a62747e1
 
 COCOAPODS: 0.35.0

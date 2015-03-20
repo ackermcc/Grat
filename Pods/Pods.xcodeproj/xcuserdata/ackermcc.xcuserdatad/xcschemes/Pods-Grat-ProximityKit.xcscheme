@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5919BCBE6DA685C5B36ADC0C"
+               BlueprintIdentifier = "AC3A8E9B98C8FB8B819A5EC9"
                BuildableName = "libPods-Grat-ProximityKit.a"
                BlueprintName = "Pods-Grat-ProximityKit"
                ReferencedContainer = "container:Pods.xcodeproj">
