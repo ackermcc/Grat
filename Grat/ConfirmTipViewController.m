@@ -29,6 +29,16 @@
                                    target: nil action: nil];
     
     [self.navigationItem setBackBarButtonItem: backButton];
+    
+    UIColor *pink = [UIColor colorWithRed:240.0/255.0 green:70.0/255.0 blue:94.0/255.0 alpha:1.0];
+    
+    self.btnSubmitTip.layer.cornerRadius = 5;
+    [self.btnSubmitTip setBackgroundColor:pink];
+    self.btnSubmitTip.tintColor = [UIColor whiteColor];
+    
+    self.btnCancelTip.layer.cornerRadius = 5;
+    [self.btnCancelTip setBackgroundColor:[UIColor grayColor]];
+    self.btnCancelTip.tintColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {

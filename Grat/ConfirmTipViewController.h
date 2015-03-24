@@ -18,4 +18,6 @@
 
 @property (nonatomic) BOOL cameFromCreateTip;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnSubmitTip;
+@property (weak, nonatomic) IBOutlet UIButton *btnCancelTip;
 @end

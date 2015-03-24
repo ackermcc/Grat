@@ -23,7 +23,6 @@
 		F3D0D4D71A62EB4B00949143 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0D4D61A62EB4B00949143 /* Images.xcassets */; };
 		F3D0D4DA1A62EB4B00949143 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3D0D4D81A62EB4B00949143 /* LaunchScreen.xib */; };
 		F3D0D4E61A62EB4B00949143 /* GratTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D4E51A62EB4B00949143 /* GratTests.m */; };
-		F3D0D4F51A62EC2800949143 /* SPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D4F21A62EC2800949143 /* SPTableViewController.m */; };
 		F3D0D4F61A62EC2800949143 /* TipSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D4F41A62EC2800949143 /* TipSelectionTableViewController.m */; };
 		F3D0D4F81A62F3E200949143 /* ProximityKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3D0D4F71A62F3E200949143 /* ProximityKit.plist */; };
 		F3E4BAF21A98EAF400FB0971 /* TipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3E4BAF11A98EAF400FB0971 /* TipTableViewCell.m */; };
@@ -69,8 +68,6 @@
 		F3D0D4DF1A62EB4B00949143 /* GratTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GratTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0D4E41A62EB4B00949143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3D0D4E51A62EB4B00949143 /* GratTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GratTests.m; sourceTree = "<group>"; };
-		F3D0D4F11A62EC2800949143 /* SPTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTableViewController.h; sourceTree = "<group>"; };
-		F3D0D4F21A62EC2800949143 /* SPTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTableViewController.m; sourceTree = "<group>"; };
 		F3D0D4F31A62EC2800949143 /* TipSelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipSelectionTableViewController.h; sourceTree = "<group>"; };
 		F3D0D4F41A62EC2800949143 /* TipSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipSelectionTableViewController.m; sourceTree = "<group>"; };
 		F3D0D4F71A62F3E200949143 /* ProximityKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProximityKit.plist; sourceTree = "<group>"; };
@@ -146,8 +143,6 @@
 				F3CC35AD1A6D7F08004FC99C /* CustomTipViewController.m */,
 				F352E1F81A98F872001165A4 /* SPTableViewCell.h */,
 				F352E1F91A98F872001165A4 /* SPTableViewCell.m */,
-				F3D0D4F11A62EC2800949143 /* SPTableViewController.h */,
-				F3D0D4F21A62EC2800949143 /* SPTableViewController.m */,
 				F3CA1EA31AB7F893009F84E3 /* LocateSPViewController.h */,
 				F3CA1EA41AB7F893009F84E3 /* LocateSPViewController.m */,
 				F3209E071AAEA391004CAF88 /* GestureViewController.h */,
@@ -335,7 +330,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3D0D4F51A62EC2800949143 /* SPTableViewController.m in Sources */,
 				F31C71871A6E21FF00C4F958 /* TransactionHistoryTableViewController.m in Sources */,
 				F3D0D4F61A62EC2800949143 /* TipSelectionTableViewController.m in Sources */,
 				F352E1FA1A98F872001165A4 /* SPTableViewCell.m in Sources */,

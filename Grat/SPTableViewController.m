@@ -34,6 +34,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -41,16 +44,16 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     //Back Button
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithTitle: @"Back"
+    UIBarButtonItem *histButton = [[UIBarButtonItem alloc]
+                                   initWithTitle: @"History"
                                    style: UIBarButtonItemStylePlain
-                                   target: nil action: nil];
+                                   target: self action: @selector(toHistory)];
     
     //Search
     UIBarButtonItem *search = [[UIBarButtonItem alloc]
                                    initWithTitle: @"Search"
                                    style: UIBarButtonItemStylePlain
-                                   target: nil action: nil];
+                                   target: self action: @selector(toHistory)];
     
     [search setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                     [UIFont fontWithName:@"FontAwesome" size:20.0], NSFontAttributeName,
@@ -60,46 +63,32 @@
                           forState:UIControlStateNormal];
     
     search.title = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-search"];
+    histButton.title = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-search"];
     
-    [self.navigationItem setBackBarButtonItem: backButton];
-    [self.navigationItem setRightBarButtonItems:@[search] animated:YES];
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:histButton,search, nil] animated:YES];
     
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.proximityKitManager startRangingIBeacons];
+//    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
     self.SPs = [[NSMutableArray alloc] init];
     
-    [center addObserverForName:@"FoundBeacon"
-                        object:nil
-                         queue:nil
-                    usingBlock:^(NSNotification *notification)
-     {
-         //         NSLog(@"Beacon Notificaton: %@",notification.userInfo);
-         
-//         [self.tempSPs addObject:notification.userInfo];
-         [self newSP:notification.userInfo];
-         //         NSLog(@"Notifications Count: %lu",(unsigned long)self.SPs.count);
-     }];
+//    [center addObserverForName:@"FoundBeacon"
+//                        object:nil
+//                         queue:nil
+//                    usingBlock:^(NSNotification *notification)
+//     {
+//         [self newSP:notification.userInfo];
+//     }];
 
-//    self.navigationItem.title = [NSString stringWithFormat:@"Tip: %@", self.selectedTipAmount];
-    
-    // Initialize the refresh control.
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor darkGrayColor];
-    self.refreshControl.tintColor = [UIColor whiteColor];
-    [self.refreshControl addTarget:self
-                            action:@selector(refresh)
-                  forControlEvents:UIControlEventValueChanged];
-    
-//    [self findNearbySP];
     [self.SPs addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Daryl",@"firstName",@"Mootoo",@"lastName",@"Junior Valet",@"position",@"Best Valet, Llc",@"company",@" ",@"hard", nil]];
     
     //Long Press
     self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdAction:)];
     [self.longPress setMinimumPressDuration:0.01];
     [self.btnFindSP addGestureRecognizer:self.longPress];
+}
+
+-(void)toHistory {
+    [self.navigationController performSegueWithIdentifier:@"history" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,51 +99,44 @@
 - (void)holdAction:(UILongPressGestureRecognizer *)holdRecognizer
 {
     if (holdRecognizer.state == UIGestureRecognizerStateBegan) {
+        [self empty];
         NSLog(@"Holding Correctly. Release when ready.");
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        
+        [center addObserverForName:@"FoundBeacon"
+                            object:nil
+                             queue:nil
+                        usingBlock:^(NSNotification *notification)
+         {
+             [self newSP:notification.userInfo];
+         }];
     } else if (holdRecognizer.state == UIGestureRecognizerStateEnded)
     {
         NSLog(@"You let go!");
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        
+        [center removeObserver:nil name:@"FoundBeacon" object:nil];
+        
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate.proximityKitManager stopRangingIBeacons];
     }
 }
 
 - (void)newSP: (NSDictionary *)sp {
     [self.SPs addObject:sp];
-    [self reloadData];
+    [self refresh];
+}
+
+-(void)empty {
+    [self.SPs removeAllObjects];
+    [self.tableView reloadData];
 }
 
 -(void)refresh {
-    if ([self.refreshControl isRefreshing]) {
-        NSLog(@"Refreshing");
-        [self.SPs removeAllObjects];
-        
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        [appDelegate.proximityKitManager startRangingIBeacons];
-        
-    }
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.proximityKitManager startRangingIBeacons];
     
-    [self reloadData];
-}
-
-- (void)reloadData
-{
-    NSLog(@"Reload");
-    
-    // Reload table data
     [self.tableView reloadData];
-    
-    // End the refreshing
-    if (self.refreshControl) {
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MMM d, h:mm a"];
-        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                                                    forKey:NSForegroundColorAttributeName];
-        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-        self.refreshControl.attributedTitle = attributedTitle;
-        
-        [self.refreshControl endRefreshing];
-    }
 }
 
 #pragma mark - Table view data source

@@ -26,11 +26,10 @@
     self.spTableView.dataSource = self;
     self.spTableView.delegate = self;
     
-    //Back Button
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithTitle: @"Back"
+    UIBarButtonItem *histButton = [[UIBarButtonItem alloc]
+                                   initWithTitle: @"History"
                                    style: UIBarButtonItemStylePlain
-                                   target: nil action: nil];
+                                   target: self action: @selector(toHistory)];
     
     //Search
     UIBarButtonItem *search = [[UIBarButtonItem alloc]
@@ -47,35 +46,19 @@
     
     search.title = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-search"];
     
-    [self.navigationItem setBackBarButtonItem: backButton];
-    [self.navigationItem setRightBarButtonItems:@[search] animated:YES];
-    
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:histButton,search, nil]];
     
     self.SPs = [[NSMutableArray alloc] init];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
     [center addObserverForName:@"FoundBeacon"
                         object:nil
                          queue:nil
                     usingBlock:^(NSNotification *notification)
      {
-         //         NSLog(@"Beacon Notificaton: %@",notification.userInfo);
-         
-         //         [self.tempSPs addObject:notification.userInfo];
          [self newSP:notification.userInfo];
-         //         NSLog(@"Notifications Count: %lu",(unsigned long)self.SPs.count);
      }];
-    
-    //    self.navigationItem.title = [NSString stringWithFormat:@"Tip: %@", self.selectedTipAmount];
-    
-    // Initialize the refresh control.
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor darkGrayColor];
-    self.refreshControl.tintColor = [UIColor whiteColor];
-    [self.refreshControl addTarget:self
-                            action:@selector(refresh)
-                  forControlEvents:UIControlEventValueChanged];
-    [self.spTableView addSubview:self.refreshControl];
     
     //    [self findNearbySP];
     [self.SPs addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Daryl",@"firstName",@"Mootoo",@"lastName",@"Junior Valet",@"position",@"Best Valet, Llc",@"company",@" ",@"hard", nil]];
@@ -86,15 +69,21 @@
     [self.btnFindSP addGestureRecognizer:self.longPress];
 }
 
+-(void)toHistory {
+    [self performSegueWithIdentifier:@"history" sender:self];
+}
+
 - (void)holdAction:(UILongPressGestureRecognizer *)holdRecognizer
 {
     if (holdRecognizer.state == UIGestureRecognizerStateBegan) {
+        [self empty];
         NSLog(@"Holding Correctly. Release when ready.");
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         [appDelegate.proximityKitManager startRangingIBeacons];
     } else if (holdRecognizer.state == UIGestureRecognizerStateEnded)
     {
         NSLog(@"You let go!");
+        
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         [appDelegate.proximityKitManager stopRangingIBeacons];
     }
@@ -102,42 +91,19 @@
 
 - (void)newSP: (NSDictionary *)sp {
     [self.SPs addObject:sp];
-    [self reloadData];
+    [self refresh];
+}
+
+-(void)empty {
+    [self.SPs removeAllObjects];
+    [self.spTableView reloadData];
 }
 
 -(void)refresh {
-    if ([self.refreshControl isRefreshing]) {
-        NSLog(@"Refreshing");
-        [self.SPs removeAllObjects];
-        
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        [appDelegate.proximityKitManager startRangingIBeacons];
-        
-    }
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.proximityKitManager startRangingIBeacons];
     
-    [self reloadData];
-}
-
-- (void)reloadData
-{
-    NSLog(@"Reload");
-    
-    // Reload table data
     [self.spTableView reloadData];
-    
-    // End the refreshing
-    if (self.refreshControl) {
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MMM d, h:mm a"];
-        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                                                    forKey:NSForegroundColorAttributeName];
-        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-        self.refreshControl.attributedTitle = attributedTitle;
-        
-        [self.refreshControl endRefreshing];
-    }
 }
 
 #pragma mark - Table view data source

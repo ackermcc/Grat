@@ -22,7 +22,6 @@
     [self.proximityKitManager.locationManager requestWhenInUseAuthorization];
     [self.proximityKitManager.locationManager requestAlwaysAuthorization];
     [self.proximityKitManager start];
-    self.rangedBeacons = [[NSMutableArray alloc] init];
     
     UIColor *brandGreen = [UIColor colorWithRed:16.0/255.0 green:189.0/255.0 blue:128.0/255.0 alpha:1.0];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -39,12 +38,12 @@
 -(void)proximityKit:(RPKManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(RPKRegion *)region {
     
     if (region) {
-        [self.rangedBeacons addObject:region.attributes];
         // Post a notification with the URL to open
         [[NSNotificationCenter defaultCenter]
          postNotificationName:@"FoundBeacon"
          object:self
          userInfo:region.attributes];
+        NSLog(@"new beacon: %@",region.attributes);
     }
     
     [self.proximityKitManager stopRangingIBeacons];

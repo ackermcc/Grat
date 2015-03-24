@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *btnFindSP;
 
 @property (nonatomic) BOOL cameFromCreateTip;
+@property (nonatomic) BOOL holding;
 
 @property (nonatomic) UILongPressGestureRecognizer *longPress;
 
